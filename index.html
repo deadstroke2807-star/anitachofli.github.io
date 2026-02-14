@@ -372,53 +372,181 @@
             animation: fadeInUp 1.2s ease;
         }
         
-        /* Music Button */
-        .music-btn {
+        /* Music Player - Estilo Apple */
+        .music-player {
             position: fixed;
             bottom: 30px;
             right: 30px;
+            background: rgba(29, 29, 31, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            width: 320px;
+            transition: all 0.4s ease;
+        }
+        
+        .music-player.minimized {
             width: 60px;
             height: 60px;
+            padding: 0;
             border-radius: 50%;
-            background: linear-gradient(135deg, #ff6b9d 0%, #c471ed 100%);
+            overflow: hidden;
+        }
+        
+        .player-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .music-player.minimized .player-header,
+        .music-player.minimized .player-controls,
+        .music-player.minimized .progress-container {
+            display: none;
+        }
+        
+        .song-info {
+            flex: 1;
+        }
+        
+        .song-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #f5f5f7;
+            margin-bottom: 4px;
+        }
+        
+        .song-artist {
+            font-size: 0.85rem;
+            color: #86868b;
+        }
+        
+        .minimize-btn {
+            background: none;
             border: none;
+            color: #86868b;
+            font-size: 1.2rem;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
-            z-index: 1000;
-            font-size: 24px;
-            transition: all 0.3s ease;
+            padding: 5px;
+            transition: color 0.2s;
+        }
+        
+        .minimize-btn:hover {
+            color: #f5f5f7;
+        }
+        
+        .player-controls {
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: pulseButton 2s infinite;
+            gap: 20px;
+            margin-bottom: 15px;
         }
         
-        .music-btn:hover {
+        .control-btn {
+            background: none;
+            border: none;
+            color: #f5f5f7;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 5px;
+        }
+        
+        .control-btn:hover {
             transform: scale(1.1);
+            color: #ff6b9d;
+        }
+        
+        .play-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c471ed 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+        }
+        
+        .play-btn:hover {
             box-shadow: 0 6px 20px rgba(255, 107, 157, 0.6);
         }
         
-        /* Spotify Player */
-        .spotify-container {
-            position: fixed;
-            bottom: 110px;
-            right: 30px;
-            z-index: 999;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.4s ease;
-            pointer-events: none;
+        .progress-container {
+            margin-bottom: 10px;
         }
         
-        .spotify-container.show {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: all;
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #3a3a3c;
+            border-radius: 2px;
+            overflow: hidden;
+            cursor: pointer;
         }
         
-        .spotify-container iframe {
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b9d 0%, #c471ed 100%);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #86868b;
+            margin-top: 8px;
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .volume-icon {
+            color: #86868b;
+            font-size: 1rem;
+        }
+        
+        .volume-slider {
+            flex: 1;
+            height: 4px;
+            background: #3a3a3c;
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .volume-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b9d 0%, #c471ed 100%);
+            width: 70%;
+            border-radius: 2px;
+        }
+        
+        /* Minimized Play Button */
+        .minimized-play {
+            display: none;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c471ed 100%);
+            cursor: pointer;
+            animation: pulseButton 2s infinite;
+        }
+        
+        .music-player.minimized .minimized-play {
+            display: flex;
         }
         
         /* Animations */
@@ -511,13 +639,16 @@
                 font-size: 2rem;
             }
             
-            .spotify-container {
-                right: 10px;
-                left: 10px;
+            .music-player {
+                bottom: 20px;
+                right: 20px;
+                left: 20px;
+                width: auto;
             }
             
-            .spotify-container iframe {
-                width: 100% !important;
+            .music-player.minimized {
+                left: auto;
+                width: 60px;
             }
         }
         
@@ -539,7 +670,7 @@
     <section class="photo-timeline">
         <div class="timeline-container">
             
-            <div class="photo-card" style="--index: 0" onclick="scrollToStory()">
+            <div class="photo-card" style="--index: 0" onclick="scrollToSection('story1')">
                 <div class="photo-wrapper">
                     <div class="photo-number">1</div>
                     <img src="foto1.jpeg" alt="Momento 1">
@@ -551,7 +682,7 @@
                 </div>
             </div>
             
-            <div class="photo-card" style="--index: 1" onclick="scrollToStory()">
+            <div class="photo-card" style="--index: 1" onclick="scrollToSection('story2')">
                 <div class="photo-wrapper">
                     <div class="photo-number">2</div>
                     <img src="foto2.jpeg" alt="Momento 2">
@@ -563,7 +694,7 @@
                 </div>
             </div>
             
-            <div class="photo-card" style="--index: 2" onclick="scrollToStory()">
+            <div class="photo-card" style="--index: 2" onclick="scrollToSection('story3')">
                 <div class="photo-wrapper">
                     <div class="photo-number">3</div>
                     <img src="foto3.jpeg" alt="Momento 3">
@@ -575,7 +706,7 @@
                 </div>
             </div>
             
-            <div class="photo-card" style="--index: 3" onclick="scrollToStory()">
+            <div class="photo-card" style="--index: 3" onclick="scrollToSection('story4')">
                 <div class="photo-wrapper">
                     <div class="photo-number">4</div>
                     <img src="foto4.jpeg" alt="Momento 4">
@@ -587,62 +718,62 @@
                 </div>
             </div>
             
-            <div class="photo-card" style="--index: 4" onclick="scrollToStory()">
+            <div class="photo-card" style="--index: 4" onclick="scrollToSection('feature1')">
                 <div class="photo-wrapper">
                     <div class="photo-number">5</div>
                     <img src="foto5.jpeg" alt="Momento 5">
                     <div class="arrow-right">→</div>
                 </div>
                 <div class="photo-caption">
-                    <h3>Recuerdos</h3>
-                    <p>Inolvidables</p>
+                    <h3>Feliz Aniversario</h3>
+                    <p>Un año juntos</p>
                 </div>
             </div>
             
-            <div class="photo-card" style="--index: 5" onclick="scrollToStory()">
+            <div class="photo-card" style="--index: 5" onclick="scrollToSection('gallery1')">
                 <div class="photo-wrapper">
                     <div class="photo-number">6</div>
                     <img src="foto6.jpeg" alt="Momento 6">
                     <div class="arrow-down-left">↓</div>
                 </div>
                 <div class="photo-caption">
-                    <h3>Felicidad</h3>
-                    <p>Contigo siempre</p>
+                    <h3>Recuerdos</h3>
+                    <p>Momentos inolvidables</p>
                 </div>
             </div>
             
-            <div class="photo-card" style="--index: 6" onclick="scrollToStory()">
+            <div class="photo-card" style="--index: 6" onclick="scrollToSection('story5')">
                 <div class="photo-wrapper">
                     <div class="photo-number">7</div>
                     <img src="foto7.jpeg" alt="Momento 7">
                     <div class="arrow-right">→</div>
                 </div>
                 <div class="photo-caption">
-                    <h3>Aventuras</h3>
-                    <p>A tu lado</p>
+                    <h3>Nuestra Canción</h3>
+                    <p>Rico - Alvarito Díaz</p>
                 </div>
             </div>
             
-            <div class="photo-card" style="--index: 7" onclick="scrollToStory()">
+            <div class="photo-card" style="--index: 7" onclick="scrollToSection('story6')">
                 <div class="photo-wrapper">
                     <div class="photo-number">8</div>
                     <img src="foto8.jpeg" alt="Momento 8">
                     <div class="arrow-right">→</div>
                 </div>
                 <div class="photo-caption">
-                    <h3>Sonrisas</h3>
-                    <p>Que me enamoran</p>
+                    <h3>Amor Eterno</h3>
+                    <p>Para siempre</p>
                 </div>
             </div>
             
-            <div class="photo-card" style="--index: 8" onclick="scrollToStory()">
+            <div class="photo-card" style="--index: 8" onclick="scrollToSection('finalSection')">
                 <div class="photo-wrapper">
                     <div class="photo-number">9</div>
                     <img src="foto9.jpeg" alt="Momento 9">
                 </div>
                 <div class="photo-caption">
-                    <h3>Mi Persona Favorita</h3>
-                    <p>Para toda la vida</p>
+                    <h3>Te Amo</h3>
+                    <p>Ana Sofía Rojas Valderrama</p>
                 </div>
             </div>
             
@@ -653,7 +784,7 @@
     <div class="story-timeline" id="storyTimeline">
         
         <!-- Story Block 1 -->
-        <div class="story-block">
+        <div class="story-block" id="story1">
             <div class="story-content">
                 <div class="story-text">
                     <h3>El Comienzo de Nuestra Historia</h3>
@@ -668,7 +799,7 @@
         </div>
         
         <!-- Story Block 2 -->
-        <div class="story-block">
+        <div class="story-block" id="story2">
             <div class="story-content">
                 <div class="story-text">
                     <h3>Un Día Para Celebrar</h3>
@@ -683,7 +814,7 @@
         </div>
         
         <!-- Story Block 3 -->
-        <div class="story-block">
+        <div class="story-block" id="story3">
             <div class="story-content">
                 <div class="story-text">
                     <h3>Cambiaste Mi Forma de Amar</h3>
@@ -698,7 +829,7 @@
         </div>
         
         <!-- Story Block 4 -->
-        <div class="story-block">
+        <div class="story-block" id="story4">
             <div class="story-content">
                 <div class="story-text">
                     <h3>Mi Princesa Única</h3>
@@ -713,7 +844,7 @@
         </div>
         
         <!-- Feature Block -->
-        <div class="feature-block story-block">
+        <div class="feature-block story-block" id="feature1">
             <h2>Feliz Año de Nuestra Primera Interacción</h2>
             <p>
                 Feliz 14 de febrero, Feliz San Valentín, feliz comienzo de mi vida, vida mía, y quiero que sepas que el amor por ti es un amor que sobrepasa barreras, que sobrepasa mundos y sobretodo, que me llena día a día, me da tranquilidad, paz, ganas y muchas muchas muchas expectativas.
@@ -724,7 +855,7 @@
         </div>
         
         <!-- Gallery Grid Block -->
-        <div class="story-block">
+        <div class="story-block" id="gallery1">
             <div class="feature-block">
                 <h2>Momentos Inolvidables</h2>
                 <div class="gallery-grid-timeline">
@@ -739,7 +870,7 @@
         </div>
         
         <!-- Story Block 5 -->
-        <div class="story-block">
+        <div class="story-block" id="story5">
             <div class="story-content">
                 <div class="story-text">
                     <h3>Como Dice Alvarito Díaz...</h3>
@@ -754,7 +885,7 @@
         </div>
         
         <!-- Story Block 6 -->
-        <div class="story-block">
+        <div class="story-block" id="story6">
             <div class="story-content">
                 <div class="story-text">
                     <h3>Te Amaré Hasta el Último Día</h3>
@@ -769,7 +900,7 @@
         </div>
         
         <!-- Final Gallery -->
-        <div class="story-block">
+        <div class="story-block" id="gallery2">
             <div class="feature-block">
                 <h2>Nuestros Últimos Recuerdos</h2>
                 <div class="gallery-grid-timeline">
@@ -783,36 +914,136 @@
     </div>
     
     <!-- Final Section -->
-    <section class="final-section">
+    <section class="final-section" id="finalSection">
         <h2>TE AMO ANA SOFÍA ROJAS VALDERRAMA</h2>
         <p>Te amo amor de mi vida y ya quiero verte, no importa cuándo lo leas, siempre quiero verte...</p>
         <p style="margin-top: 30px; font-size: 1.8rem; color: #ff6b9d;">Feliz 14 de Febrero mi bebé consentida ❤️</p>
     </section>
     
-    <!-- Spotify Player -->
-    <div class="spotify-container" id="spotifyContainer">
-        <iframe 
-            style="border-radius:12px" 
-            src="https://open.spotify.com/embed/track/03V0FZwKTJhXeW2zVNkyP7?utm_source=generator" 
-            width="300" 
-            height="152" 
-            frameBorder="0" 
-            allowfullscreen="" 
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-            loading="lazy">
-        </iframe>
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <div class="minimized-play" onclick="togglePlayer()">🎵</div>
+        
+        <div class="player-header">
+            <div class="song-info">
+                <div class="song-title">Rico</div>
+                <div class="song-artist">Alvarito Díaz</div>
+            </div>
+            <button class="minimize-btn" onclick="togglePlayer()">−</button>
+        </div>
+        
+        <div class="player-controls">
+            <button class="control-btn" onclick="seekBackward()">⏪</button>
+            <button class="control-btn play-btn" id="playBtn" onclick="togglePlay()">▶️</button>
+            <button class="control-btn" onclick="seekForward()">⏩</button>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar" onclick="seekTo(event)">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="time-display">
+                <span id="currentTime">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+        </div>
+        
+        <div class="volume-control">
+            <span class="volume-icon">🔊</span>
+            <div class="volume-slider" id="volumeSlider" onclick="setVolume(event)">
+                <div class="volume-fill" id="volumeFill"></div>
+            </div>
+        </div>
     </div>
     
-    <!-- Music Button -->
-    <button class="music-btn" id="musicBtn" onclick="toggleSpotify()">
-        🎵
-    </button>
+    <!-- Audio Element -->
+    <audio id="audioPlayer" loop>
+        <source src="rico.mp3" type="audio/mpeg">
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
     
     <script>
-        // Scroll to story timeline
-        function scrollToStory() {
-            const timeline = document.getElementById('storyTimeline');
-            timeline.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Scroll to specific section
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+        
+        // Audio Player
+        const audio = document.getElementById('audioPlayer');
+        const playBtn = document.getElementById('playBtn');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const volumeFill = document.getElementById('volumeFill');
+        
+        let isPlaying = false;
+        
+        // Toggle Play/Pause
+        function togglePlay() {
+            if (isPlaying) {
+                audio.pause();
+                playBtn.innerHTML = '▶️';
+            } else {
+                audio.play();
+                playBtn.innerHTML = '⏸️';
+            }
+            isPlaying = !isPlaying;
+        }
+        
+        // Update progress bar
+        audio.addEventListener('timeupdate', () => {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressFill.style.width = progress + '%';
+            currentTimeEl.textContent = formatTime(audio.currentTime);
+        });
+        
+        // Set duration when loaded
+        audio.addEventListener('loadedmetadata', () => {
+            durationEl.textContent = formatTime(audio.duration);
+        });
+        
+        // Seek to position
+        function seekTo(e) {
+            const progressBar = document.getElementById('progressBar');
+            const clickX = e.offsetX;
+            const width = progressBar.offsetWidth;
+            const duration = audio.duration;
+            audio.currentTime = (clickX / width) * duration;
+        }
+        
+        // Seek forward/backward
+        function seekForward() {
+            audio.currentTime = Math.min(audio.currentTime + 10, audio.duration);
+        }
+        
+        function seekBackward() {
+            audio.currentTime = Math.max(audio.currentTime - 10, 0);
+        }
+        
+        // Set volume
+        function setVolume(e) {
+            const volumeSlider = document.getElementById('volumeSlider');
+            const clickX = e.offsetX;
+            const width = volumeSlider.offsetWidth;
+            const volume = clickX / width;
+            audio.volume = volume;
+            volumeFill.style.width = (volume * 100) + '%';
+        }
+        
+        // Format time
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        // Toggle player minimized/expanded
+        function togglePlayer() {
+            const player = document.getElementById('musicPlayer');
+            player.classList.toggle('minimized');
         }
         
         // Intersection Observer para revelar bloques
@@ -833,23 +1064,8 @@
             observer.observe(block);
         });
         
-        // Toggle Spotify
-        let spotifyVisible = false;
-        
-        function toggleSpotify() {
-            const container = document.getElementById('spotifyContainer');
-            const btn = document.getElementById('musicBtn');
-            
-            if (spotifyVisible) {
-                container.classList.remove('show');
-                btn.innerHTML = '🎵';
-            } else {
-                container.classList.add('show');
-                btn.innerHTML = '🎶';
-            }
-            
-            spotifyVisible = !spotifyVisible;
-        }
+        // Set initial volume
+        audio.volume = 0.7;
     </script>
     
 </body>
