@@ -20,13 +20,13 @@
         
         /* Hero Section */
         .hero {
-            height: 100vh;
+            min-height: 60vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
+            padding: 80px 20px 40px;
             background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
         }
         
@@ -44,82 +44,162 @@
             font-size: 1.5rem;
             font-weight: 300;
             color: #86868b;
-            margin-bottom: 60px;
+            margin-bottom: 20px;
             animation: fadeInUp 1.2s ease;
         }
         
-        /* Gallery Grid - Estilo Apple */
-        .gallery-hero {
-            min-height: 100vh;
-            padding: 100px 40px;
+        .hero .hint {
+            font-size: 1rem;
+            color: #86868b;
+            margin-top: 20px;
+            animation: fadeInUp 1.4s ease;
+        }
+        
+        /* Photo Gallery Timeline */
+        .photo-timeline {
+            padding: 60px 40px 100px;
             background: #000;
-        }
-        
-        .gallery-hero h2 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 60px;
-            color: #f5f5f7;
-        }
-        
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .product-card {
-            background: #1d1d1f;
-            border-radius: 18px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
         }
         
-        .product-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 60px rgba(255, 107, 157, 0.3);
+        .timeline-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            position: relative;
         }
         
-        .product-card img {
+        /* Photo Card */
+        .photo-card {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInScale 0.6s ease forwards;
+            animation-delay: calc(var(--index) * 0.1s);
+            opacity: 0;
+        }
+        
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .photo-card:hover {
+            transform: scale(1.05) translateY(-5px);
+            z-index: 10;
+        }
+        
+        .photo-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #1d1d1f;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .photo-card:hover .photo-wrapper {
+            box-shadow: 0 20px 60px rgba(255, 107, 157, 0.4);
+        }
+        
+        .photo-wrapper img {
             width: 100%;
             height: 350px;
             object-fit: cover;
             display: block;
+            transition: transform 0.4s ease;
         }
         
-        .product-number {
+        .photo-card:hover .photo-wrapper img {
+            transform: scale(1.1);
+        }
+        
+        /* Photo Number Badge */
+        .photo-number {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 107, 157, 0.9);
+            top: 15px;
+            left: 15px;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 107, 157, 0.95);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-        
-        .product-label {
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .product-label h3 {
+            font-weight: 700;
             font-size: 1.2rem;
+            z-index: 5;
+            box-shadow: 0 4px 12px rgba(255, 107, 157, 0.4);
+        }
+        
+        /* Arrow Connectors */
+        .arrow-connector {
+            position: absolute;
+            color: #ff6b9d;
+            font-size: 2.5rem;
+            z-index: 1;
+            opacity: 0.7;
+            animation: arrowPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes arrowPulse {
+            0%, 100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+        
+        /* Positioning arrows between cards */
+        .photo-card:nth-child(1) .arrow-right { display: block; }
+        .photo-card:nth-child(2) .arrow-right { display: block; }
+        .photo-card:nth-child(3) .arrow-down-left { display: block; }
+        .photo-card:nth-child(4) .arrow-right { display: block; }
+        .photo-card:nth-child(5) .arrow-right { display: block; }
+        .photo-card:nth-child(6) .arrow-down-left { display: block; }
+        .photo-card:nth-child(7) .arrow-right { display: block; }
+        .photo-card:nth-child(8) .arrow-right { display: block; }
+        
+        .arrow-right {
+            position: absolute;
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: none;
+        }
+        
+        .arrow-down-left {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+        }
+        
+        /* Photo Caption */
+        .photo-caption {
+            padding: 20px;
+            background: #1d1d1f;
+        }
+        
+        .photo-caption h3 {
+            font-size: 1.1rem;
             font-weight: 500;
             color: #f5f5f7;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
         
-        .product-label p {
+        .photo-caption p {
             font-size: 0.9rem;
             color: #86868b;
         }
@@ -129,14 +209,6 @@
             max-width: 1200px;
             margin: 100px auto;
             padding: 0 40px;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease;
-        }
-        
-        .story-timeline.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
         
         .story-block {
@@ -213,7 +285,7 @@
             transform: scale(1.05);
         }
         
-        /* Large Feature Block */
+        /* Feature Block */
         .feature-block {
             margin: 150px 0;
             text-align: center;
@@ -250,7 +322,7 @@
             display: block;
         }
         
-        /* Gallery Grid in Timeline */
+        /* Gallery Grid */
         .gallery-grid-timeline {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -272,13 +344,13 @@
         
         /* Final Section */
         .final-section {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 40px;
+            padding: 80px 40px;
             background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
         }
         
@@ -349,17 +421,6 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
         }
         
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #86868b;
-            font-size: 0.9rem;
-            animation: bounce 2s infinite;
-        }
-        
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -369,15 +430,6 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
-            }
-        }
-        
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            50% {
-                transform: translateX(-50%) translateY(-10px);
             }
         }
         
@@ -396,9 +448,29 @@
                 font-size: 2.5rem;
             }
             
-            .products-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 20px;
+            .timeline-container {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            
+            .arrow-right,
+            .arrow-down-left {
+                display: none !important;
+            }
+            
+            .photo-card:after {
+                content: '↓';
+                position: absolute;
+                bottom: -40px;
+                left: 50%;
+                transform: translateX(-50%);
+                color: #ff6b9d;
+                font-size: 2rem;
+                animation: arrowPulse 2s ease-in-out infinite;
+            }
+            
+            .photo-card:last-child:after {
+                display: none;
             }
             
             .story-block:nth-child(odd) .story-content,
@@ -460,93 +532,120 @@
     <section class="hero">
         <h1>Para Ana Sofía</h1>
         <p class="subtitle">14 de Febrero de 2026 · Un año de amor</p>
-        <div class="scroll-indicator">↓ Explora nuestra historia ↓</div>
+        <p class="hint">Haz clic en cualquier foto para ver nuestra historia completa ↓</p>
     </section>
     
-    <!-- Gallery Hero - Estilo Apple -->
-    <section class="gallery-hero">
-        <h2>Nuestros Momentos</h2>
-        <div class="products-grid">
-            <div class="product-card" onclick="scrollToStory()">
-                <div class="product-number">1</div>
-                <img src="foto1.jpeg" alt="Primer momento">
-                <div class="product-label">
+    <!-- Photo Gallery Timeline -->
+    <section class="photo-timeline">
+        <div class="timeline-container">
+            
+            <div class="photo-card" style="--index: 0" onclick="scrollToStory()">
+                <div class="photo-wrapper">
+                    <div class="photo-number">1</div>
+                    <img src="foto1.jpeg" alt="Momento 1">
+                    <div class="arrow-right">→</div>
+                </div>
+                <div class="photo-caption">
                     <h3>El Comienzo</h3>
                     <p>14 de Febrero, 2025</p>
                 </div>
             </div>
             
-            <div class="product-card" onclick="scrollToStory()">
-                <div class="product-number">2</div>
-                <img src="foto2.jpeg" alt="Segundo momento">
-                <div class="product-label">
+            <div class="photo-card" style="--index: 1" onclick="scrollToStory()">
+                <div class="photo-wrapper">
+                    <div class="photo-number">2</div>
+                    <img src="foto2.jpeg" alt="Momento 2">
+                    <div class="arrow-right">→</div>
+                </div>
+                <div class="photo-caption">
                     <h3>Juntos</h3>
                     <p>Nuestro amor crece</p>
                 </div>
             </div>
             
-            <div class="product-card" onclick="scrollToStory()">
-                <div class="product-number">3</div>
-                <img src="foto3.jpeg" alt="Tercer momento">
-                <div class="product-label">
-                    <h3>Momentos Especiales</h3>
-                    <p>Cada día contigo</p>
+            <div class="photo-card" style="--index: 2" onclick="scrollToStory()">
+                <div class="photo-wrapper">
+                    <div class="photo-number">3</div>
+                    <img src="foto3.jpeg" alt="Momento 3">
+                    <div class="arrow-down-left">↓</div>
                 </div>
-            </div>
-            
-            <div class="product-card" onclick="scrollToStory()">
-                <div class="product-number">4</div>
-                <img src="foto4.jpeg" alt="Cuarto momento">
-                <div class="product-label">
-                    <h3>Amor Verdadero</h3>
+                <div class="photo-caption">
+                    <h3>Cambiaste Mi Vida</h3>
                     <p>Para siempre</p>
                 </div>
             </div>
             
-            <div class="product-card" onclick="scrollToStory()">
-                <div class="product-number">5</div>
-                <img src="foto5.jpeg" alt="Quinto momento">
-                <div class="product-label">
+            <div class="photo-card" style="--index: 3" onclick="scrollToStory()">
+                <div class="photo-wrapper">
+                    <div class="photo-number">4</div>
+                    <img src="foto4.jpeg" alt="Momento 4">
+                    <div class="arrow-right">→</div>
+                </div>
+                <div class="photo-caption">
+                    <h3>Mi Princesa</h3>
+                    <p>Única y especial</p>
+                </div>
+            </div>
+            
+            <div class="photo-card" style="--index: 4" onclick="scrollToStory()">
+                <div class="photo-wrapper">
+                    <div class="photo-number">5</div>
+                    <img src="foto5.jpeg" alt="Momento 5">
+                    <div class="arrow-right">→</div>
+                </div>
+                <div class="photo-caption">
                     <h3>Recuerdos</h3>
                     <p>Inolvidables</p>
                 </div>
             </div>
             
-            <div class="product-card" onclick="scrollToStory()">
-                <div class="product-number">6</div>
-                <img src="foto6.jpeg" alt="Sexto momento">
-                <div class="product-label">
+            <div class="photo-card" style="--index: 5" onclick="scrollToStory()">
+                <div class="photo-wrapper">
+                    <div class="photo-number">6</div>
+                    <img src="foto6.jpeg" alt="Momento 6">
+                    <div class="arrow-down-left">↓</div>
+                </div>
+                <div class="photo-caption">
                     <h3>Felicidad</h3>
                     <p>Contigo siempre</p>
                 </div>
             </div>
             
-            <div class="product-card" onclick="scrollToStory()">
-                <div class="product-number">7</div>
-                <img src="foto7.jpeg" alt="Séptimo momento">
-                <div class="product-label">
+            <div class="photo-card" style="--index: 6" onclick="scrollToStory()">
+                <div class="photo-wrapper">
+                    <div class="photo-number">7</div>
+                    <img src="foto7.jpeg" alt="Momento 7">
+                    <div class="arrow-right">→</div>
+                </div>
+                <div class="photo-caption">
                     <h3>Aventuras</h3>
                     <p>A tu lado</p>
                 </div>
             </div>
             
-            <div class="product-card" onclick="scrollToStory()">
-                <div class="product-number">8</div>
-                <img src="foto8.jpeg" alt="Octavo momento">
-                <div class="product-label">
+            <div class="photo-card" style="--index: 7" onclick="scrollToStory()">
+                <div class="photo-wrapper">
+                    <div class="photo-number">8</div>
+                    <img src="foto8.jpeg" alt="Momento 8">
+                    <div class="arrow-right">→</div>
+                </div>
+                <div class="photo-caption">
                     <h3>Sonrisas</h3>
                     <p>Que me enamoran</p>
                 </div>
             </div>
             
-            <div class="product-card" onclick="scrollToStory()">
-                <div class="product-number">9</div>
-                <img src="foto9.jpeg" alt="Noveno momento">
-                <div class="product-label">
-                    <h3>Mi Persona</h3>
-                    <p>Favorita</p>
+            <div class="photo-card" style="--index: 8" onclick="scrollToStory()">
+                <div class="photo-wrapper">
+                    <div class="photo-number">9</div>
+                    <img src="foto9.jpeg" alt="Momento 9">
+                </div>
+                <div class="photo-caption">
+                    <h3>Mi Persona Favorita</h3>
+                    <p>Para toda la vida</p>
                 </div>
             </div>
+            
         </div>
     </section>
     
@@ -554,7 +653,7 @@
     <div class="story-timeline" id="storyTimeline">
         
         <!-- Story Block 1 -->
-        <div class="story-block" id="story1">
+        <div class="story-block">
             <div class="story-content">
                 <div class="story-text">
                     <h3>El Comienzo de Nuestra Historia</h3>
@@ -569,7 +668,7 @@
         </div>
         
         <!-- Story Block 2 -->
-        <div class="story-block" id="story2">
+        <div class="story-block">
             <div class="story-content">
                 <div class="story-text">
                     <h3>Un Día Para Celebrar</h3>
@@ -584,7 +683,7 @@
         </div>
         
         <!-- Story Block 3 -->
-        <div class="story-block" id="story3">
+        <div class="story-block">
             <div class="story-content">
                 <div class="story-text">
                     <h3>Cambiaste Mi Forma de Amar</h3>
@@ -599,7 +698,7 @@
         </div>
         
         <!-- Story Block 4 -->
-        <div class="story-block" id="story4">
+        <div class="story-block">
             <div class="story-content">
                 <div class="story-text">
                     <h3>Mi Princesa Única</h3>
@@ -614,7 +713,7 @@
         </div>
         
         <!-- Feature Block -->
-        <div class="feature-block story-block" id="feature1">
+        <div class="feature-block story-block">
             <h2>Feliz Año de Nuestra Primera Interacción</h2>
             <p>
                 Feliz 14 de febrero, Feliz San Valentín, feliz comienzo de mi vida, vida mía, y quiero que sepas que el amor por ti es un amor que sobrepasa barreras, que sobrepasa mundos y sobretodo, que me llena día a día, me da tranquilidad, paz, ganas y muchas muchas muchas expectativas.
@@ -625,7 +724,7 @@
         </div>
         
         <!-- Gallery Grid Block -->
-        <div class="story-block" id="gallery1">
+        <div class="story-block">
             <div class="feature-block">
                 <h2>Momentos Inolvidables</h2>
                 <div class="gallery-grid-timeline">
@@ -640,7 +739,7 @@
         </div>
         
         <!-- Story Block 5 -->
-        <div class="story-block" id="story5">
+        <div class="story-block">
             <div class="story-content">
                 <div class="story-text">
                     <h3>Como Dice Alvarito Díaz...</h3>
@@ -655,7 +754,7 @@
         </div>
         
         <!-- Story Block 6 -->
-        <div class="story-block" id="story6">
+        <div class="story-block">
             <div class="story-content">
                 <div class="story-text">
                     <h3>Te Amaré Hasta el Último Día</h3>
@@ -670,7 +769,7 @@
         </div>
         
         <!-- Final Gallery -->
-        <div class="story-block" id="gallery2">
+        <div class="story-block">
             <div class="feature-block">
                 <h2>Nuestros Últimos Recuerdos</h2>
                 <div class="gallery-grid-timeline">
@@ -713,16 +812,10 @@
         // Scroll to story timeline
         function scrollToStory() {
             const timeline = document.getElementById('storyTimeline');
-            timeline.classList.add('visible');
             timeline.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            
-            // Revelar primer bloque
-            setTimeout(() => {
-                document.getElementById('story1').classList.add('revealed');
-            }, 500);
         }
         
-        // Intersection Observer para revelar bloques al hacer scroll
+        // Intersection Observer para revelar bloques
         const observerOptions = {
             threshold: 0.3,
             rootMargin: '0px 0px -100px 0px'
@@ -736,7 +829,6 @@
             });
         }, observerOptions);
         
-        // Observar todos los bloques de historia
         document.querySelectorAll('.story-block').forEach(block => {
             observer.observe(block);
         });
