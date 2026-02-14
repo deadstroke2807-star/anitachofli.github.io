@@ -40,56 +40,154 @@
             animation: fadeInUp 1s ease;
         }
         
-        .hero .date {
+        .hero .subtitle {
             font-size: 1.5rem;
             font-weight: 300;
             color: #86868b;
+            margin-bottom: 60px;
             animation: fadeInUp 1.2s ease;
         }
         
-        .hero .start-hint {
-            margin-top: 40px;
-            font-size: 1rem;
-            color: #86868b;
-            animation: pulse 2s infinite;
-        }
-        
-        /* Section Container */
-        .section {
+        /* Gallery Grid - Estilo Apple */
+        .gallery-hero {
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 80px 20px;
-            opacity: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 1s ease;
-        }
-        
-        .section.revealed {
-            opacity: 1;
-            max-height: none;
-        }
-        
-        .content-wrapper {
-            max-width: 980px;
-            margin: 0 auto;
-        }
-        
-        /* Text Sections */
-        .text-section {
+            padding: 100px 40px;
             background: #000;
         }
         
-        .text-content {
+        .gallery-hero h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #f5f5f7;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .product-card {
+            background: #1d1d1f;
+            border-radius: 18px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 107, 157, 0.3);
+        }
+        
+        .product-card img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .product-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 107, 157, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .product-label {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .product-label h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #f5f5f7;
+            margin-bottom: 8px;
+        }
+        
+        .product-label p {
+            font-size: 0.9rem;
+            color: #86868b;
+        }
+        
+        /* Story Timeline */
+        .story-timeline {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 0 40px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+        
+        .story-timeline.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .story-block {
+            margin-bottom: 150px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .story-block.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Alternating Layout */
+        .story-block:nth-child(odd) .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .story-block:nth-child(even) .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .story-block:nth-child(even) .story-text {
+            order: 2;
+        }
+        
+        .story-block:nth-child(even) .story-image {
+            order: 1;
+        }
+        
+        .story-text h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c471ed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .story-text p {
             font-size: 1.3rem;
             line-height: 1.8;
-            font-weight: 400;
             color: #f5f5f7;
             letter-spacing: 0.01em;
-            transform: translateY(30px);
-            animation: fadeInUp 1.2s ease forwards;
         }
         
         .text-highlight {
@@ -97,150 +195,78 @@
             font-weight: 600;
         }
         
-        /* Image Sections */
-        .image-section {
-            background: #000;
-            padding: 40px 20px;
-            cursor: pointer;
+        .story-image {
             position: relative;
-        }
-        
-        .image-section::after {
-            content: 'Toca para continuar ❤️';
-            position: absolute;
-            bottom: 60px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 107, 157, 0.9);
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-        
-        .image-section.clickable::after {
-            opacity: 1;
-            animation: bounce 2s infinite;
-        }
-        
-        .image-container {
-            position: relative;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
             overflow: hidden;
             border-radius: 20px;
-            transform: scale(1);
-            transition: all 0.5s ease;
         }
         
-        .image-section.clickable .image-container:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 40px rgba(255, 107, 157, 0.4);
-        }
-        
-        .image-container img {
+        .story-image img {
             width: 100%;
             height: auto;
             display: block;
             border-radius: 20px;
-        }
-        
-        /* Large Image Section */
-        .large-image-section {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .large-image-section::after {
-            content: 'Toca para continuar ❤️';
-            position: absolute;
-            bottom: 60px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 107, 157, 0.9);
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 10;
-        }
-        
-        .large-image-section.clickable::after {
-            opacity: 1;
-            animation: bounce 2s infinite;
-        }
-        
-        .large-image-section img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
             transition: transform 0.5s ease;
         }
         
-        .large-image-section.clickable:hover img {
+        .story-block:hover .story-image img {
             transform: scale(1.05);
         }
         
-        /* Gallery Grid */
-        .gallery-section {
-            padding: 80px 20px;
-            background: #000;
-            cursor: pointer;
-            position: relative;
+        /* Large Feature Block */
+        .feature-block {
+            margin: 150px 0;
+            text-align: center;
         }
         
-        .gallery-section::after {
-            content: 'Toca para continuar ❤️';
-            position: absolute;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 107, 157, 0.9);
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 10;
+        .feature-block h2 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c471ed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
-        .gallery-section.clickable::after {
-            opacity: 1;
-            animation: bounce 2s infinite;
+        .feature-block p {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            color: #86868b;
+            max-width: 900px;
+            margin: 0 auto 60px;
         }
         
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 16px;
-            animation: fadeInScale 0.8s ease forwards;
-        }
-        
-        .gallery-item img {
+        .feature-image {
             width: 100%;
-            height: 350px;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
         }
         
-        .gallery-section.clickable .gallery-item:hover img {
+        .feature-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Gallery Grid in Timeline */
+        .gallery-grid-timeline {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 60px 0;
+        }
+        
+        .gallery-grid-timeline img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 16px;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-grid-timeline img:hover {
             transform: scale(1.05);
         }
         
@@ -257,7 +283,7 @@
         }
         
         .final-section h2 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
             margin-bottom: 30px;
             background: linear-gradient(135deg, #ff6b9d 0%, #c471ed 100%);
@@ -300,11 +326,7 @@
             box-shadow: 0 6px 20px rgba(255, 107, 157, 0.6);
         }
         
-        .music-btn:active {
-            transform: scale(0.95);
-        }
-        
-        /* Spotify Player Container */
+        /* Spotify Player */
         .spotify-container {
             position: fixed;
             bottom: 110px;
@@ -327,15 +349,15 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
         }
         
-        /* Progress Indicator */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #ff6b9d 0%, #c471ed 100%);
-            z-index: 1001;
-            transition: width 0.5s ease;
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #86868b;
+            font-size: 0.9rem;
+            animation: bounce 2s infinite;
         }
         
         /* Animations */
@@ -350,23 +372,12 @@
             }
         }
         
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        
-        @keyframes pulse {
+        @keyframes bounce {
             0%, 100% {
-                opacity: 0.6;
+                transform: translateX(-50%) translateY(0);
             }
             50% {
-                opacity: 1;
+                transform: translateX(-50%) translateY(-10px);
             }
         }
         
@@ -379,43 +390,56 @@
             }
         }
         
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            50% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-        }
-        
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 968px) {
             .hero h1 {
                 font-size: 2.5rem;
             }
             
-            .hero .date {
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .story-block:nth-child(odd) .story-content,
+            .story-block:nth-child(even) .story-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .story-block:nth-child(even) .story-text {
+                order: 1;
+            }
+            
+            .story-block:nth-child(even) .story-image {
+                order: 2;
+            }
+            
+            .story-text h3 {
+                font-size: 1.5rem;
+            }
+            
+            .story-text p {
+                font-size: 1.1rem;
+            }
+            
+            .feature-block h2 {
+                font-size: 2.5rem;
+            }
+            
+            .feature-block p {
                 font-size: 1.2rem;
             }
             
-            .text-content {
-                font-size: 1.1rem;
+            .gallery-grid-timeline {
+                grid-template-columns: 1fr;
             }
             
             .final-section h2 {
                 font-size: 2rem;
             }
             
-            .final-section p {
-                font-size: 1.2rem;
-            }
-            
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .spotify-container {
-                bottom: 110px;
                 right: 10px;
                 left: 10px;
             }
@@ -423,17 +447,8 @@
             .spotify-container iframe {
                 width: 100% !important;
             }
-            
-            .image-section::after,
-            .large-image-section::after,
-            .gallery-section::after {
-                font-size: 0.8rem;
-                padding: 10px 20px;
-                bottom: 40px;
-            }
         }
         
-        /* Smooth Scroll */
         html {
             scroll-behavior: smooth;
         }
@@ -441,144 +456,241 @@
 </head>
 <body>
     
-    <!-- Progress Bar -->
-    <div class="progress-bar" id="progressBar"></div>
-    
     <!-- Hero Section -->
-    <section class="hero section revealed">
+    <section class="hero">
         <h1>Para Ana Sofía</h1>
-        <p class="date">14 de Febrero de 2026</p>
-        <p class="start-hint">↓ Desplázate hacia abajo para comenzar ↓</p>
+        <p class="subtitle">14 de Febrero de 2026 · Un año de amor</p>
+        <div class="scroll-indicator">↓ Explora nuestra historia ↓</div>
     </section>
     
-    <!-- Section 1: Introducción -->
-    <section class="section text-section revealed" id="section1">
-        <div class="content-wrapper">
-            <p class="text-content">
-                <span class="text-highlight">14 de Febrero</span>, hoy hace un año empecé mi historia con la que sería el amor de mi vida, y sinceramente no tengo más que total agradecimiento por toda la felicidad que me has dado en este año, porque desde esa primera cita, supe que iba con toda por conseguir y construir una vida a tu lado, y lo estoy consiguiendo, porque me estoy convirtiendo en la mejor persona junto a mi persona favorita.
+    <!-- Gallery Hero - Estilo Apple -->
+    <section class="gallery-hero">
+        <h2>Nuestros Momentos</h2>
+        <div class="products-grid">
+            <div class="product-card" onclick="scrollToStory()">
+                <div class="product-number">1</div>
+                <img src="foto1.jpeg" alt="Primer momento">
+                <div class="product-label">
+                    <h3>El Comienzo</h3>
+                    <p>14 de Febrero, 2025</p>
+                </div>
+            </div>
+            
+            <div class="product-card" onclick="scrollToStory()">
+                <div class="product-number">2</div>
+                <img src="foto2.jpeg" alt="Segundo momento">
+                <div class="product-label">
+                    <h3>Juntos</h3>
+                    <p>Nuestro amor crece</p>
+                </div>
+            </div>
+            
+            <div class="product-card" onclick="scrollToStory()">
+                <div class="product-number">3</div>
+                <img src="foto3.jpeg" alt="Tercer momento">
+                <div class="product-label">
+                    <h3>Momentos Especiales</h3>
+                    <p>Cada día contigo</p>
+                </div>
+            </div>
+            
+            <div class="product-card" onclick="scrollToStory()">
+                <div class="product-number">4</div>
+                <img src="foto4.jpeg" alt="Cuarto momento">
+                <div class="product-label">
+                    <h3>Amor Verdadero</h3>
+                    <p>Para siempre</p>
+                </div>
+            </div>
+            
+            <div class="product-card" onclick="scrollToStory()">
+                <div class="product-number">5</div>
+                <img src="foto5.jpeg" alt="Quinto momento">
+                <div class="product-label">
+                    <h3>Recuerdos</h3>
+                    <p>Inolvidables</p>
+                </div>
+            </div>
+            
+            <div class="product-card" onclick="scrollToStory()">
+                <div class="product-number">6</div>
+                <img src="foto6.jpeg" alt="Sexto momento">
+                <div class="product-label">
+                    <h3>Felicidad</h3>
+                    <p>Contigo siempre</p>
+                </div>
+            </div>
+            
+            <div class="product-card" onclick="scrollToStory()">
+                <div class="product-number">7</div>
+                <img src="foto7.jpeg" alt="Séptimo momento">
+                <div class="product-label">
+                    <h3>Aventuras</h3>
+                    <p>A tu lado</p>
+                </div>
+            </div>
+            
+            <div class="product-card" onclick="scrollToStory()">
+                <div class="product-number">8</div>
+                <img src="foto8.jpeg" alt="Octavo momento">
+                <div class="product-label">
+                    <h3>Sonrisas</h3>
+                    <p>Que me enamoran</p>
+                </div>
+            </div>
+            
+            <div class="product-card" onclick="scrollToStory()">
+                <div class="product-number">9</div>
+                <img src="foto9.jpeg" alt="Noveno momento">
+                <div class="product-label">
+                    <h3>Mi Persona</h3>
+                    <p>Favorita</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Story Timeline -->
+    <div class="story-timeline" id="storyTimeline">
+        
+        <!-- Story Block 1 -->
+        <div class="story-block" id="story1">
+            <div class="story-content">
+                <div class="story-text">
+                    <h3>El Comienzo de Nuestra Historia</h3>
+                    <p>
+                        <span class="text-highlight">14 de Febrero</span>, hoy hace un año empecé mi historia con la que sería el amor de mi vida, y sinceramente no tengo más que total agradecimiento por toda la felicidad que me has dado en este año, porque desde esa primera cita, supe que iba con toda por conseguir y construir una vida a tu lado, y lo estoy consiguiendo, porque me estoy convirtiendo en la mejor persona junto a mi persona favorita.
+                    </p>
+                </div>
+                <div class="story-image">
+                    <img src="foto1.jpeg" alt="Nuestro comienzo">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Story Block 2 -->
+        <div class="story-block" id="story2">
+            <div class="story-content">
+                <div class="story-text">
+                    <h3>Un Día Para Celebrar</h3>
+                    <p>
+                        Hoy es un día para celebrar, para reír y para recordar, recordar nuestro amor, nuestro propósito, para imaginar nuestro futuro, y pensar en lo sobredimensional que es nuestro amor... llegó mi día esperado del mes y en este caso, mi segundo día más esperado, porque el más importante ya está a la vuelta de la esquina.
+                    </p>
+                </div>
+                <div class="story-image">
+                    <img src="foto2.jpeg" alt="Celebrando juntos">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Story Block 3 -->
+        <div class="story-block" id="story3">
+            <div class="story-content">
+                <div class="story-text">
+                    <h3>Cambiaste Mi Forma de Amar</h3>
+                    <p>
+                        "No sé en qué punto exacto pasó, pero un día dejé de imaginar 'algún futuro' y empecé a imaginar uno con tu nombre. <span class="text-highlight">Ana Sofía</span>, tú me cambiaste la forma de amar: ya no se trata de decirlo bonito, se trata de hacerlo real. Se trata de estar, de sostener, de cuidar, de elegirte incluso en lo simple: en un 'ya comiste', en un 'te extraño', en un 'ven, lo resolvemos'."
+                    </p>
+                </div>
+                <div class="story-image">
+                    <img src="foto3.jpeg" alt="Amor verdadero">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Story Block 4 -->
+        <div class="story-block" id="story4">
+            <div class="story-content">
+                <div class="story-text">
+                    <h3>Mi Princesa Única</h3>
+                    <p>
+                        Solo pienso, lo logré, logré conseguir mi princesa única y especial, exclusiva e inimaginable, y al mirar mi foto de chiquito, solo pido que ese niño tenga paciencia, tenga esperanza y tenga fe, porque a sus 20 años iba a conocer a la mujer más maravillosa que existe, la mujer más increíble que existe, la mujer que será, <span class="text-highlight">el amor de su vida</span>.
+                    </p>
+                </div>
+                <div class="story-image">
+                    <img src="foto4.jpeg" alt="Mi princesa">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Feature Block -->
+        <div class="feature-block story-block" id="feature1">
+            <h2>Feliz Año de Nuestra Primera Interacción</h2>
+            <p>
+                Feliz 14 de febrero, Feliz San Valentín, feliz comienzo de mi vida, vida mía, y quiero que sepas que el amor por ti es un amor que sobrepasa barreras, que sobrepasa mundos y sobretodo, que me llena día a día, me da tranquilidad, paz, ganas y muchas muchas muchas expectativas.
             </p>
+            <div class="feature-image">
+                <img src="foto10.jpeg" alt="Nuestro amor">
+            </div>
         </div>
-    </section>
-    
-    <!-- Image 1 -->
-    <section class="image-section section revealed clickable" id="img1" onclick="revealNext('section2')">
-        <div class="image-container">
-            <img src="foto1.jpeg" alt="Nosotros">
+        
+        <!-- Gallery Grid Block -->
+        <div class="story-block" id="gallery1">
+            <div class="feature-block">
+                <h2>Momentos Inolvidables</h2>
+                <div class="gallery-grid-timeline">
+                    <img src="foto5.jpeg" alt="Recuerdo 5">
+                    <img src="foto6.jpeg" alt="Recuerdo 6">
+                    <img src="foto7.jpeg" alt="Recuerdo 7">
+                    <img src="foto8.jpeg" alt="Recuerdo 8">
+                    <img src="foto9.jpeg" alt="Recuerdo 9">
+                    <img src="foto11.jpeg" alt="Recuerdo 11">
+                </div>
+            </div>
         </div>
-    </section>
-    
-    <!-- Section 2: Celebración -->
-    <section class="section text-section" id="section2">
-        <div class="content-wrapper">
-            <p class="text-content">
-                Hoy es un día para celebrar, para reír y para recordar, recordar nuestro amor, nuestro propósito, para imaginar nuestro futuro, y pensar en lo sobredimensional que es nuestro amor... llegó mi día esperado del mes y en este caso, mi segundo día más esperado, porque el más importante ya está a la vuelta de la esquina.
-            </p>
+        
+        <!-- Story Block 5 -->
+        <div class="story-block" id="story5">
+            <div class="story-content">
+                <div class="story-text">
+                    <h3>Como Dice Alvarito Díaz...</h3>
+                    <p>
+                        <span class="text-highlight">"Tú me endulzas con tu pelo y me despego del suelo"</span> y <span class="text-highlight">"Contigo me siento rico aunque no haya na' en la alcancía"</span>. Mi bebé hermosa, gracias por estos meses tan especiales, por esta vida tan linda que me estás dando, por todo lo que me enseñas y por todo lo que aprendo a tu lado.
+                    </p>
+                </div>
+                <div class="story-image">
+                    <img src="foto12.jpeg" alt="Nuestra canción">
+                </div>
+            </div>
         </div>
-    </section>
-    
-    <!-- Image 2 -->
-    <section class="large-image-section section" id="img2" onclick="revealNext('section3')">
-        <img src="foto2.jpeg" alt="Juntos">
-    </section>
-    
-    <!-- Section 3: El cambio -->
-    <section class="section text-section" id="section3">
-        <div class="content-wrapper">
-            <p class="text-content">
-                Citando algún mensaje anterior... "No sé en qué punto exacto pasó, pero un día dejé de imaginar 'algún futuro' y empecé a imaginar uno con tu nombre. <span class="text-highlight">Ana Sofía</span>, tú me cambiaste la forma de amar: ya no se trata de decirlo bonito, se trata de hacerlo real. Se trata de estar, de sostener, de cuidar, de elegirte incluso en lo simple: en un 'ya comiste', en un 'te extraño', en un 'ven, lo resolvemos'."
-            </p>
+        
+        <!-- Story Block 6 -->
+        <div class="story-block" id="story6">
+            <div class="story-content">
+                <div class="story-text">
+                    <h3>Te Amaré Hasta el Último Día</h3>
+                    <p>
+                        Te amo con todo mi corazón y espero que siempre nos amemos como lo hacemos ahorita, eres la persona más increíble que existe y juro por todo lo que tengo que voy a amarte hasta el último día de mi vida. Quiero recordarte que este es un mes más de los tantos que vamos a vivir juntos, pues <span class="text-highlight">lo único que puede separarnos no ha sido inventado, creado o si quiera imaginado</span>, porque lo nuestro es más fuerte que cualquier cosa.
+                    </p>
+                </div>
+                <div class="story-image">
+                    <img src="foto13.jpeg" alt="Para siempre">
+                </div>
+            </div>
         </div>
-    </section>
-    
-    <!-- Image 3 -->
-    <section class="image-section section" id="img3" onclick="revealNext('section4')">
-        <div class="image-container">
-            <img src="foto3.jpeg" alt="Momentos especiales">
+        
+        <!-- Final Gallery -->
+        <div class="story-block" id="gallery2">
+            <div class="feature-block">
+                <h2>Nuestros Últimos Recuerdos</h2>
+                <div class="gallery-grid-timeline">
+                    <img src="foto14.jpeg" alt="Recuerdo 14">
+                    <img src="foto15.jpeg" alt="Recuerdo 15">
+                    <img src="foto10.jpeg" alt="Juntos">
+                </div>
+            </div>
         </div>
-    </section>
-    
-    <!-- Section 4: El logro -->
-    <section class="section text-section" id="section4">
-        <div class="content-wrapper">
-            <p class="text-content">
-                Solo pienso, lo logré, logré conseguir mi princesa única y especial, exclusiva e inimaginable, y al mirar mi foto de chiquito, solo pido que ese niño tenga paciencia, tenga esperanza y tenga fe, porque a sus 20 años iba a conocer a la mujer más maravillosa que existe, la mujer más increíble que existe, la mujer que será, <span class="text-highlight">el amor de su vida</span>.
-            </p>
-        </div>
-    </section>
-    
-    <!-- Image 4 -->
-    <section class="large-image-section section" id="img4" onclick="revealNext('section5')">
-        <img src="foto4.jpeg" alt="Amor">
-    </section>
-    
-    <!-- Section 5: Felicitaciones -->
-    <section class="section text-section" id="section5">
-        <div class="content-wrapper">
-            <p class="text-content">
-                Feliz año de nuestra primera interacción, feliz 14 de febrero, Feliz San Valentín, feliz comienzo de mi vida, vida mía, y quiero que sepas que el amor por ti es un amor que sobrepasa barreras, que sobrepasa mundos y sobretodo, que me llena día a día, me da tranquilidad, paz, ganas y muchas muchas muchas expectativas.
-            </p>
-        </div>
-    </section>
-    
-    <!-- Gallery Grid 1 -->
-    <section class="gallery-section section" id="gallery1" onclick="revealNext('section6')">
-        <div class="gallery-grid">
-            <div class="gallery-item"><img src="foto5.jpeg" alt="Recuerdo 5"></div>
-            <div class="gallery-item"><img src="foto6.jpeg" alt="Recuerdo 6"></div>
-            <div class="gallery-item"><img src="foto7.jpeg" alt="Recuerdo 7"></div>
-            <div class="gallery-item"><img src="foto8.jpeg" alt="Recuerdo 8"></div>
-            <div class="gallery-item"><img src="foto9.jpeg" alt="Recuerdo 9"></div>
-            <div class="gallery-item"><img src="foto10.jpeg" alt="Recuerdo 10"></div>
-        </div>
-    </section>
-    
-    <!-- Section 6: Alvarito Díaz -->
-    <section class="section text-section" id="section6">
-        <div class="content-wrapper">
-            <p class="text-content">
-                Porque como dijo Alvarito Díaz alguna vez... <span class="text-highlight">"Tú me endulzas con tu pelo y me despego del suelo"</span> y <span class="text-highlight">"Contigo me siento rico aunque no haya na' en la alcancía"</span>. Mi bebé hermosa, gracias por estos meses tan especiales, por esta vida tan linda que me estás dando, por todo lo que me enseñas y por todo lo que aprendo a tu lado.
-            </p>
-        </div>
-    </section>
-    
-    <!-- Image 11 -->
-    <section class="image-section section" id="img11" onclick="revealNext('section7')">
-        <div class="image-container">
-            <img src="foto11.jpeg" alt="Nosotros felices">
-        </div>
-    </section>
-    
-    <!-- Section 7: Promesa -->
-    <section class="section text-section" id="section7">
-        <div class="content-wrapper">
-            <p class="text-content">
-                Te amo con todo mi corazón y espero que siempre nos amemos como lo hacemos ahorita, eres la persona más increíble que existe y juro por todo lo que tengo que voy a amarte hasta el último día de mi vida. Quiero recordarte que este es un mes más de los tantos que vamos a vivir juntos, pues <span class="text-highlight">lo único que puede separarnos no ha sido inventado, creado o si quiera imaginado</span>, porque lo nuestro es más fuerte que cualquier cosa.
-            </p>
-        </div>
-    </section>
-    
-    <!-- Gallery Grid 2 -->
-    <section class="gallery-section section" id="gallery2" onclick="revealNext('finalSection')">
-        <div class="gallery-grid">
-            <div class="gallery-item"><img src="foto12.jpeg" alt="Recuerdo 12"></div>
-            <div class="gallery-item"><img src="foto13.jpeg" alt="Recuerdo 13"></div>
-            <div class="gallery-item"><img src="foto14.jpeg" alt="Recuerdo 14"></div>
-        </div>
-    </section>
+        
+    </div>
     
     <!-- Final Section -->
-    <section class="final-section section" id="finalSection">
+    <section class="final-section">
         <h2>TE AMO ANA SOFÍA ROJAS VALDERRAMA</h2>
         <p>Te amo amor de mi vida y ya quiero verte, no importa cuándo lo leas, siempre quiero verte...</p>
         <p style="margin-top: 30px; font-size: 1.8rem; color: #ff6b9d;">Feliz 14 de Febrero mi bebé consentida ❤️</p>
     </section>
     
-    <!-- Last Image -->
-    <section class="large-image-section section" id="lastImg">
-        <img src="foto15.jpeg" alt="Juntos para siempre">
-    </section>
-    
-    <!-- Spotify Player Container -->
+    <!-- Spotify Player -->
     <div class="spotify-container" id="spotifyContainer">
         <iframe 
             style="border-radius:12px" 
@@ -598,57 +710,38 @@
     </button>
     
     <script>
-        // Contador de secciones reveladas
-        let currentSection = 1;
-        const totalSections = 11;
-        
-        // Función para revelar la siguiente sección
-        function revealNext(nextId) {
-            const nextSection = document.getElementById(nextId);
-            const currentClickable = event.currentTarget;
+        // Scroll to story timeline
+        function scrollToStory() {
+            const timeline = document.getElementById('storyTimeline');
+            timeline.classList.add('visible');
+            timeline.scrollIntoView({ behavior: 'smooth', block: 'start' });
             
-            if (nextSection && !nextSection.classList.contains('revealed')) {
-                // Remover clase clickable del elemento actual
-                currentClickable.classList.remove('clickable');
-                
-                // Revelar siguiente sección
-                nextSection.classList.add('revealed');
-                
-                // Agregar clase clickable a la siguiente imagen/galería si existe
-                const nextClickable = nextSection.nextElementSibling;
-                if (nextClickable && (nextClickable.classList.contains('image-section') || 
-                    nextClickable.classList.contains('large-image-section') || 
-                    nextClickable.classList.contains('gallery-section'))) {
-                    setTimeout(() => {
-                        nextClickable.classList.add('clickable');
-                    }, 800);
-                }
-                
-                // Actualizar barra de progreso
-                currentSection++;
-                updateProgress();
-                
-                // Scroll suave a la siguiente sección
-                setTimeout(() => {
-                    nextSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 300);
-                
-                // Si es la última sección, revelar la imagen final
-                if (nextId === 'finalSection') {
-                    setTimeout(() => {
-                        document.getElementById('lastImg').classList.add('revealed');
-                    }, 1500);
-                }
-            }
+            // Revelar primer bloque
+            setTimeout(() => {
+                document.getElementById('story1').classList.add('revealed');
+            }, 500);
         }
         
-        // Actualizar barra de progreso
-        function updateProgress() {
-            const progress = (currentSection / totalSections) * 100;
-            document.getElementById('progressBar').style.width = progress + '%';
-        }
+        // Intersection Observer para revelar bloques al hacer scroll
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -100px 0px'
+        };
         
-        // Toggle Spotify Player
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+        
+        // Observar todos los bloques de historia
+        document.querySelectorAll('.story-block').forEach(block => {
+            observer.observe(block);
+        });
+        
+        // Toggle Spotify
         let spotifyVisible = false;
         
         function toggleSpotify() {
@@ -665,9 +758,6 @@
             
             spotifyVisible = !spotifyVisible;
         }
-        
-        // Inicializar barra de progreso
-        updateProgress();
     </script>
     
 </body>
