@@ -47,6 +47,13 @@
             animation: fadeInUp 1.2s ease;
         }
         
+        .hero .start-hint {
+            margin-top: 40px;
+            font-size: 1rem;
+            color: #86868b;
+            animation: pulse 2s infinite;
+        }
+        
         /* Section Container */
         .section {
             min-height: 100vh;
@@ -54,6 +61,15 @@
             align-items: center;
             justify-content: center;
             padding: 80px 20px;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 1s ease;
+        }
+        
+        .section.revealed {
+            opacity: 1;
+            max-height: none;
         }
         
         .content-wrapper {
@@ -72,14 +88,8 @@
             font-weight: 400;
             color: #f5f5f7;
             letter-spacing: 0.01em;
-            opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-        
-        .text-content.visible {
-            opacity: 1;
-            transform: translateY(0);
+            animation: fadeInUp 1.2s ease forwards;
         }
         
         .text-highlight {
@@ -91,6 +101,28 @@
         .image-section {
             background: #000;
             padding: 40px 20px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .image-section::after {
+            content: 'Toca para continuar ❤️';
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 107, 157, 0.9);
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .image-section.clickable::after {
+            opacity: 1;
+            animation: bounce 2s infinite;
         }
         
         .image-container {
@@ -100,14 +132,13 @@
             margin: 0 auto;
             overflow: hidden;
             border-radius: 20px;
-            opacity: 0;
-            transform: scale(0.95);
-            transition: all 1s ease;
+            transform: scale(1);
+            transition: all 0.5s ease;
         }
         
-        .image-container.visible {
-            opacity: 1;
-            transform: scale(1);
+        .image-section.clickable .image-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 40px rgba(255, 107, 157, 0.4);
         }
         
         .image-container img {
@@ -125,18 +156,66 @@
             justify-content: center;
             padding: 0;
             position: relative;
+            cursor: pointer;
+        }
+        
+        .large-image-section::after {
+            content: 'Toca para continuar ❤️';
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 107, 157, 0.9);
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+        
+        .large-image-section.clickable::after {
+            opacity: 1;
+            animation: bounce 2s infinite;
         }
         
         .large-image-section img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .large-image-section.clickable:hover img {
+            transform: scale(1.05);
         }
         
         /* Gallery Grid */
         .gallery-section {
             padding: 80px 20px;
             background: #000;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .gallery-section::after {
+            content: 'Toca para continuar ❤️';
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 107, 157, 0.9);
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+        
+        .gallery-section.clickable::after {
+            opacity: 1;
+            animation: bounce 2s infinite;
         }
         
         .gallery-grid {
@@ -151,14 +230,7 @@
             position: relative;
             overflow: hidden;
             border-radius: 16px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-        
-        .gallery-item.visible {
-            opacity: 1;
-            transform: translateY(0);
+            animation: fadeInScale 0.8s ease forwards;
         }
         
         .gallery-item img {
@@ -168,7 +240,7 @@
             transition: transform 0.5s ease;
         }
         
-        .gallery-item:hover img {
+        .gallery-section.clickable .gallery-item:hover img {
             transform: scale(1.05);
         }
         
@@ -191,6 +263,7 @@
             background: linear-gradient(135deg, #ff6b9d 0%, #c471ed 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
         }
         
         .final-section p {
@@ -198,6 +271,7 @@
             font-weight: 300;
             color: #86868b;
             max-width: 800px;
+            animation: fadeInUp 1.2s ease;
         }
         
         /* Music Button */
@@ -218,7 +292,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: pulse 2s infinite;
+            animation: pulseButton 2s infinite;
         }
         
         .music-btn:hover {
@@ -253,6 +327,17 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
         }
         
+        /* Progress Indicator */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b9d 0%, #c471ed 100%);
+            z-index: 1001;
+            transition: width 0.5s ease;
+        }
+        
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -265,12 +350,41 @@
             }
         }
         
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
         @keyframes pulse {
+            0%, 100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes pulseButton {
             0%, 100% {
                 box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
             }
             50% {
                 box-shadow: 0 4px 25px rgba(255, 107, 157, 0.7);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-10px);
             }
         }
         
@@ -309,6 +423,14 @@
             .spotify-container iframe {
                 width: 100% !important;
             }
+            
+            .image-section::after,
+            .large-image-section::after,
+            .gallery-section::after {
+                font-size: 0.8rem;
+                padding: 10px 20px;
+                bottom: 40px;
+            }
         }
         
         /* Smooth Scroll */
@@ -319,14 +441,18 @@
 </head>
 <body>
     
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+    
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero section revealed">
         <h1>Para Ana Sofía</h1>
         <p class="date">14 de Febrero de 2026</p>
+        <p class="start-hint">↓ Desplázate hacia abajo para comenzar ↓</p>
     </section>
     
     <!-- Section 1: Introducción -->
-    <section class="section text-section">
+    <section class="section text-section revealed" id="section1">
         <div class="content-wrapper">
             <p class="text-content">
                 <span class="text-highlight">14 de Febrero</span>, hoy hace un año empecé mi historia con la que sería el amor de mi vida, y sinceramente no tengo más que total agradecimiento por toda la felicidad que me has dado en este año, porque desde esa primera cita, supe que iba con toda por conseguir y construir una vida a tu lado, y lo estoy consiguiendo, porque me estoy convirtiendo en la mejor persona junto a mi persona favorita.
@@ -335,14 +461,14 @@
     </section>
     
     <!-- Image 1 -->
-    <section class="image-section">
+    <section class="image-section section revealed clickable" id="img1" onclick="revealNext('section2')">
         <div class="image-container">
             <img src="foto1.jpeg" alt="Nosotros">
         </div>
     </section>
     
     <!-- Section 2: Celebración -->
-    <section class="section text-section">
+    <section class="section text-section" id="section2">
         <div class="content-wrapper">
             <p class="text-content">
                 Hoy es un día para celebrar, para reír y para recordar, recordar nuestro amor, nuestro propósito, para imaginar nuestro futuro, y pensar en lo sobredimensional que es nuestro amor... llegó mi día esperado del mes y en este caso, mi segundo día más esperado, porque el más importante ya está a la vuelta de la esquina.
@@ -351,12 +477,12 @@
     </section>
     
     <!-- Image 2 -->
-    <section class="large-image-section">
+    <section class="large-image-section section" id="img2" onclick="revealNext('section3')">
         <img src="foto2.jpeg" alt="Juntos">
     </section>
     
     <!-- Section 3: El cambio -->
-    <section class="section text-section">
+    <section class="section text-section" id="section3">
         <div class="content-wrapper">
             <p class="text-content">
                 Citando algún mensaje anterior... "No sé en qué punto exacto pasó, pero un día dejé de imaginar 'algún futuro' y empecé a imaginar uno con tu nombre. <span class="text-highlight">Ana Sofía</span>, tú me cambiaste la forma de amar: ya no se trata de decirlo bonito, se trata de hacerlo real. Se trata de estar, de sostener, de cuidar, de elegirte incluso en lo simple: en un 'ya comiste', en un 'te extraño', en un 'ven, lo resolvemos'."
@@ -365,14 +491,14 @@
     </section>
     
     <!-- Image 3 -->
-    <section class="image-section">
+    <section class="image-section section" id="img3" onclick="revealNext('section4')">
         <div class="image-container">
             <img src="foto3.jpeg" alt="Momentos especiales">
         </div>
     </section>
     
     <!-- Section 4: El logro -->
-    <section class="section text-section">
+    <section class="section text-section" id="section4">
         <div class="content-wrapper">
             <p class="text-content">
                 Solo pienso, lo logré, logré conseguir mi princesa única y especial, exclusiva e inimaginable, y al mirar mi foto de chiquito, solo pido que ese niño tenga paciencia, tenga esperanza y tenga fe, porque a sus 20 años iba a conocer a la mujer más maravillosa que existe, la mujer más increíble que existe, la mujer que será, <span class="text-highlight">el amor de su vida</span>.
@@ -381,12 +507,12 @@
     </section>
     
     <!-- Image 4 -->
-    <section class="large-image-section">
+    <section class="large-image-section section" id="img4" onclick="revealNext('section5')">
         <img src="foto4.jpeg" alt="Amor">
     </section>
     
     <!-- Section 5: Felicitaciones -->
-    <section class="section text-section">
+    <section class="section text-section" id="section5">
         <div class="content-wrapper">
             <p class="text-content">
                 Feliz año de nuestra primera interacción, feliz 14 de febrero, Feliz San Valentín, feliz comienzo de mi vida, vida mía, y quiero que sepas que el amor por ti es un amor que sobrepasa barreras, que sobrepasa mundos y sobretodo, que me llena día a día, me da tranquilidad, paz, ganas y muchas muchas muchas expectativas.
@@ -394,8 +520,8 @@
         </div>
     </section>
     
-    <!-- Gallery Grid -->
-    <section class="gallery-section">
+    <!-- Gallery Grid 1 -->
+    <section class="gallery-section section" id="gallery1" onclick="revealNext('section6')">
         <div class="gallery-grid">
             <div class="gallery-item"><img src="foto5.jpeg" alt="Recuerdo 5"></div>
             <div class="gallery-item"><img src="foto6.jpeg" alt="Recuerdo 6"></div>
@@ -407,7 +533,7 @@
     </section>
     
     <!-- Section 6: Alvarito Díaz -->
-    <section class="section text-section">
+    <section class="section text-section" id="section6">
         <div class="content-wrapper">
             <p class="text-content">
                 Porque como dijo Alvarito Díaz alguna vez... <span class="text-highlight">"Tú me endulzas con tu pelo y me despego del suelo"</span> y <span class="text-highlight">"Contigo me siento rico aunque no haya na' en la alcancía"</span>. Mi bebé hermosa, gracias por estos meses tan especiales, por esta vida tan linda que me estás dando, por todo lo que me enseñas y por todo lo que aprendo a tu lado.
@@ -416,14 +542,14 @@
     </section>
     
     <!-- Image 11 -->
-    <section class="image-section">
+    <section class="image-section section" id="img11" onclick="revealNext('section7')">
         <div class="image-container">
             <img src="foto11.jpeg" alt="Nosotros felices">
         </div>
     </section>
     
     <!-- Section 7: Promesa -->
-    <section class="section text-section">
+    <section class="section text-section" id="section7">
         <div class="content-wrapper">
             <p class="text-content">
                 Te amo con todo mi corazón y espero que siempre nos amemos como lo hacemos ahorita, eres la persona más increíble que existe y juro por todo lo que tengo que voy a amarte hasta el último día de mi vida. Quiero recordarte que este es un mes más de los tantos que vamos a vivir juntos, pues <span class="text-highlight">lo único que puede separarnos no ha sido inventado, creado o si quiera imaginado</span>, porque lo nuestro es más fuerte que cualquier cosa.
@@ -431,8 +557,8 @@
         </div>
     </section>
     
-    <!-- Images 12, 13, 14 -->
-    <section class="gallery-section">
+    <!-- Gallery Grid 2 -->
+    <section class="gallery-section section" id="gallery2" onclick="revealNext('finalSection')">
         <div class="gallery-grid">
             <div class="gallery-item"><img src="foto12.jpeg" alt="Recuerdo 12"></div>
             <div class="gallery-item"><img src="foto13.jpeg" alt="Recuerdo 13"></div>
@@ -441,14 +567,14 @@
     </section>
     
     <!-- Final Section -->
-    <section class="final-section">
+    <section class="final-section section" id="finalSection">
         <h2>TE AMO ANA SOFÍA ROJAS VALDERRAMA</h2>
         <p>Te amo amor de mi vida y ya quiero verte, no importa cuándo lo leas, siempre quiero verte...</p>
         <p style="margin-top: 30px; font-size: 1.8rem; color: #ff6b9d;">Feliz 14 de Febrero mi bebé consentida ❤️</p>
     </section>
     
     <!-- Last Image -->
-    <section class="large-image-section">
+    <section class="large-image-section section" id="lastImg">
         <img src="foto15.jpeg" alt="Juntos para siempre">
     </section>
     
@@ -472,24 +598,55 @@
     </button>
     
     <script>
-        // Intersection Observer para animaciones al hacer scroll
-        const observerOptions = {
-            threshold: 0.2,
-            rootMargin: '0px 0px -100px 0px'
-        };
+        // Contador de secciones reveladas
+        let currentSection = 1;
+        const totalSections = 11;
         
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+        // Función para revelar la siguiente sección
+        function revealNext(nextId) {
+            const nextSection = document.getElementById(nextId);
+            const currentClickable = event.currentTarget;
+            
+            if (nextSection && !nextSection.classList.contains('revealed')) {
+                // Remover clase clickable del elemento actual
+                currentClickable.classList.remove('clickable');
+                
+                // Revelar siguiente sección
+                nextSection.classList.add('revealed');
+                
+                // Agregar clase clickable a la siguiente imagen/galería si existe
+                const nextClickable = nextSection.nextElementSibling;
+                if (nextClickable && (nextClickable.classList.contains('image-section') || 
+                    nextClickable.classList.contains('large-image-section') || 
+                    nextClickable.classList.contains('gallery-section'))) {
+                    setTimeout(() => {
+                        nextClickable.classList.add('clickable');
+                    }, 800);
                 }
-            });
-        }, observerOptions);
+                
+                // Actualizar barra de progreso
+                currentSection++;
+                updateProgress();
+                
+                // Scroll suave a la siguiente sección
+                setTimeout(() => {
+                    nextSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+                
+                // Si es la última sección, revelar la imagen final
+                if (nextId === 'finalSection') {
+                    setTimeout(() => {
+                        document.getElementById('lastImg').classList.add('revealed');
+                    }, 1500);
+                }
+            }
+        }
         
-        // Observar todos los elementos con animación
-        document.querySelectorAll('.text-content, .image-container, .gallery-item').forEach(el => {
-            observer.observe(el);
-        });
+        // Actualizar barra de progreso
+        function updateProgress() {
+            const progress = (currentSection / totalSections) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
         
         // Toggle Spotify Player
         let spotifyVisible = false;
@@ -508,6 +665,9 @@
             
             spotifyVisible = !spotifyVisible;
         }
+        
+        // Inicializar barra de progreso
+        updateProgress();
     </script>
     
 </body>
